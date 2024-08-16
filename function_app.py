@@ -6,7 +6,10 @@ import traceback
 from simian.entrypoint import entry_point
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-@app.route(route="http_trigger")
+f = open('.simian.json') 
+simian_info = json.load(f) 
+
+@app.route(route={name})
 def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
@@ -22,7 +25,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # Route the post to the entrypoint method.
-    request_data[1].update({"namespace": "hello_world"})
+    request_data[1].update({"namespace": simian_info["route-namespace-map"][req.route_params.get('name')]})
 
     try:
         # Call the entry_point to access the application with the request data.
