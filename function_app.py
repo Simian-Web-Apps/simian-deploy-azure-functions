@@ -10,6 +10,11 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 f = open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'simian.json')) 
 simian_info = json.load(f) 
 print(simian_info)
+namespaces = simian_info["route-namespace-map"]
+ns_dict = {}
+
+for ns in namespaces:
+    ns_dict[ns["route"]] = ns
 
 @app.route(route="{name}")
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -27,7 +32,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # Route the post to the entrypoint method.
-    namespace = simian_info["route-namespace-map"][req.route_params.get('name')]
+    req_route = req.route_params.get("name")
+    print(req_route)
+    namespace = ns_dict[req_route]["namespace"]
     print(namespace)
     request_data[1].update({"namespace": namespace})
 
