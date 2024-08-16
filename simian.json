@@ -2,11 +2,11 @@
   "route-namespace-map" : [
     {
       "route": "hello-world",
-      "namespace": "hello_world"
+      "namespace": "apps.hello_world"
     },
     {
       "route": "hello-azure-world",
-      "namespace": "hello_azure_world"
+      "namespace": "apps.hello_azure_world"
     }
   ]
 }
