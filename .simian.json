@@ -1,8 +1,8 @@
 {
-  "route-namespace-map" [
+  "route-namespace-map" : [
     {
       "route": "hello-world",
-      "namespace": hello_world"
+      "namespace": "hello_world"
     }
   ]
 }
