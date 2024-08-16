@@ -13,12 +13,12 @@ simian_json_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'si
 f = open(simian_json_file) 
 simian_info = json.load(f) 
 
-namespace_dict = {}
+namespaces = {}
 for ns in simian_info["route-namespace-map"]:
-    namespace_dict[ns["route"]] = ns
+    namespaces[ns["route"]] = ns
 
-# route is the part after api/ and we call it name
-@app.route(route="{name}")
+# route is the part after api/ and we call it api_slug
+@app.route(route="{api_slug}")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
@@ -34,8 +34,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # Route the post to the entrypoint method.
-    request_route = req.route_params.get("name")
-    namespace = namespace_dict[request_route]["namespace"]
+    api_slug = req.route_params.get("api_slug")
+    namespace = namespaces[api_slug]["namespace"]
     request_data[1].update({"namespace": namespace})
 
     try:
