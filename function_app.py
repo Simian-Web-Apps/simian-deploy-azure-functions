@@ -10,7 +10,6 @@ f = open('.simian.json')
 simian_info = json.load(f) 
 print(simian_info)
 
-@app.function_name(name="HttpTrigger1")
 @app.route(route="{name}")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
