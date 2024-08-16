@@ -1,2 +1,4 @@
 --extra-index-url https://pypi.simiansuite.com
+azure-functions
+
 simian-gui
