@@ -22,7 +22,7 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # Route the post to the entrypoint method.
-    request_data[1].update({"namespace": "hellow_world"})
+    request_data[1].update({"namespace": "hello_world"})
 
     try:
         # Call the entry_point to access the application with the request data.
