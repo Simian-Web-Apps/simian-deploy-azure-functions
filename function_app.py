@@ -26,7 +26,9 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # Route the post to the entrypoint method.
-    request_data[1].update({"namespace": simian_info["route-namespace-map"][req.route_params.get('name')]})
+    namespace = simian_info["route-namespace-map"][req.route_params.get('name')]
+    print(namespace)
+    request_data[1].update({"namespace": namespace})
 
     try:
         # Call the entry_point to access the application with the request data.
