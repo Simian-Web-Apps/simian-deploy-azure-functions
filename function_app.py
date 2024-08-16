@@ -7,15 +7,17 @@ import os
 from simian.entrypoint import entry_point
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-f = open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'simian.json')) 
+# simian.json contains simian specific app info
+# for example a route to namespace mapping
+simian_json_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'simian.json')
+f = open(simian_json_file) 
 simian_info = json.load(f) 
-print(simian_info)
-namespaces = simian_info["route-namespace-map"]
-ns_dict = {}
 
-for ns in namespaces:
-    ns_dict[ns["route"]] = ns
+namespace_dict = {}
+for ns in simian_info["route-namespace-map"]:
+    namespace_dict[ns["route"]] = ns
 
+# route is the part after api/ and we call it name
 @app.route(route="{name}")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -32,10 +34,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     # Route the post to the entrypoint method.
-    req_route = req.route_params.get("name")
-    print(req_route)
-    namespace = ns_dict[req_route]["namespace"]
-    print(namespace)
+    request_route = req.route_params.get("name")
+    namespace = namespace_dict[request_route]["namespace"]
     request_data[1].update({"namespace": namespace})
 
     try:
