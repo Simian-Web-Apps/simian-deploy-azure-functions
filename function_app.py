@@ -2,11 +2,12 @@ import azure.functions as func
 import json
 import logging
 import traceback
+import os
 
 from simian.entrypoint import entry_point
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-f = open('.simian.json') 
+f = open(os.path.join(os.path.dirname(os.path.realpath(__file__)), '.simian.json')) 
 simian_info = json.load(f) 
 print(simian_info)
 
