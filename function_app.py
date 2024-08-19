@@ -32,3 +32,7 @@ def get_namespace(api_slug: str) -> str
         namespaces[ns["route"]] = ns
     
     namespace = namespaces[api_slug]["namespace"]
+    
+    return namespace
+    
+    
