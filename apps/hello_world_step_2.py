@@ -39,7 +39,7 @@ def gui_init(meta_data: dict) -> dict:
 
     button_show_time = component.Button("button_show_server_time", form)
     button_show_time.label = "Show Server Time"
-    button_show_time.event = "show__server_time"
+    button_show_time.event = "show_server_time"
 
     return payload
 
