@@ -21,14 +21,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 def get_namespace_by_slug(api_slug: str) -> str:
     # simian.json contains simian specific app info
     # a.o. the route to module namespace mapping
-    simian_json_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "simian.json")
-    f = open(simian_json_file)
-    simian_info = json.load(f)
-
-    namespaces = {}
-    for ns in simian_info["route-namespace-map"]:
-        namespaces[ns["route"]] = ns
-
-    namespace = namespaces[api_slug]["namespace"]
-
+    simian_json_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'simian.json')
+    f = open(simian_json_file) 
+    simian_info = json.load(f) 
+     
+    for route2ns in simian_info["route-namespace-map"]:
+        if (route2ns['route'] == api_slug):
+            namespace = route2ns['namespace']
+            break
+    
     return namespace
