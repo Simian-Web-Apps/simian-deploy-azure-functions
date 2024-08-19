@@ -1,13 +1,16 @@
 from simian.gui import Form, component, component_properties, utils
 
-examples_url = "#"
-
+examples_url = "https://github.com/Simian-Web-Apps/deploy-azure-functions"
+hello_world_step = 1
 
 # Run this file locally
 if __name__ == "__main__":
     import simian.local
 
-    simian.local.Uiformio("hello_world", window_title="Simian: Hello World!")
+    simian.local.Uiformio(
+        f"hello_world_step_{hello_world_step}",
+        window_title=f"Simian: Hello World - Step {hello_world_step} !",
+    )
 
 
 def gui_init(meta_data: dict) -> dict:
@@ -22,13 +25,13 @@ def gui_init(meta_data: dict) -> dict:
         "navbar": {
             "title": (
                 f'<a class="text-white" href="{examples_url}" target="_blank">'
-                '<i class="fa fa-github"></i></a>&nbsp;Hello World - from Simian!'
+                f'<i class="fa fa-github"></i></a>&nbsp;Hello World Step {hello_world_step} - from Simian!'
             )
         },
     }
 
     html_hello = component.HtmlElement("html_hello", form)
-    html_hello.content = "Hello World"
+    html_hello.content = f"Hello World - Step {hello_world_step}"
 
     return payload
 
