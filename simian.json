@@ -1,6 +1,10 @@
 {
   "route-namespace-map" : [
     {
+      "route": "",
+      "namespace": "apps.hello_default_world"
+    },
+    {
       "route": "hello-world",
       "namespace": "apps.hello_world"
     },
