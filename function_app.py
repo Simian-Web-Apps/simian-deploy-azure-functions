@@ -11,7 +11,7 @@ namespace = "apps.hello_world"
 
 # route is the part after the prefix (default: api/)
 #@app.route(route="{api_slug}")
-@app.route(route="")
+@app.route(route="hello-world")
 def main(req: func.HttpRequest) -> func.HttpResponse:
 #    request_route = req.route_params.get("api_slug")
 #    logging.info(f'Request route: {request_route}')
