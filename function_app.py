@@ -5,8 +5,6 @@ import os
 from simian.entrypoint import entry_point_deploy
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
-# route is the part after the prefix (default: api/)
-@app.route(route="{api_slug}")
 
 # simian.json contains simian specific app info
 # a.o. the route to module namespace mapping
@@ -17,7 +15,9 @@ simian_info = json.load(f)
 namespaces = {}
 for ns in simian_info["route-namespace-map"]:
     namespaces[ns["route"]] = ns
-
+    
+# route is the part after the prefix (default: api/)
+@app.route(route="{api_slug}")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     # Route the post to the entrypoint method.
     api_slug = req.route_params.get("api_slug")
