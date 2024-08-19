@@ -1,6 +1,8 @@
 import json
-import azure.functions as func
 import os
+import logging
+
+import azure.functions as func
 
 from simian.entrypoint import entry_point_deploy
 
@@ -10,8 +12,10 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 # route is the part after the prefix (default: api/)
 @app.route(route="{api_slug}")
 def main(req: func.HttpRequest) -> func.HttpResponse:
+    request_route = req.route_params.get("api_slug")
+    logging.info(f'Request route: {request_route}')
     # Route the post to the entrypoint method.
-    namespace = get_namespace_by_slug(req.route_params.get("api_slug"))
+    namespace = get_namespace_by_slug(request_route)
     request_data = req.get_json()
     response = entry_point_deploy(namespace, request_data)
 
