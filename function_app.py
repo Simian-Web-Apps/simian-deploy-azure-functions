@@ -15,7 +15,7 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 def main(req: func.HttpRequest) -> func.HttpResponse:
     request_data = req.get_json()
     # Compose the simian app module namespace from base namespace and route parameter "step".
-    app_module_namespace = "apps." + req.route_params.get("app")
+    app_module_namespace = "apps." + req.route_params.get("app").replace("-", "_")
     response = entry_point_deploy(app_module_namespace, request_data)
 
     return func.HttpResponse(json.dumps(response), status_code=HTTPStatus.OK)
