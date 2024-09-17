@@ -6,12 +6,12 @@ import azure.functions as func
 from simian.entrypoint import entry_point_deploy
 
 # Anonymous access for symplicity
-app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
 
 # Route is the part after the prefix (default: api/)
 # Define the route with a numeric parameter "step" to facilitate multiple hello-world steps
-@app.route(route="{app}", auth_level=func.AuthLevel.FUNCTION)
+@app.route(route="{app}")
 def main(req: func.HttpRequest) -> func.HttpResponse:
     request_data = req.get_json()
     # Compose the simian app module namespace from base namespace and route parameter "step".
