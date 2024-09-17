@@ -11,8 +11,8 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 # Route is the part after the prefix (default: api/)
 # Define the route with a numeric parameter "step" to facilitate multiple hello-world steps
-@app.route(route="{app}")
-def main(req: func.HttpRequest, auth_level=func.AuthLevel.FUNCTION) -> func.HttpResponse:
+@app.route(route="{app}", auth_level=func.AuthLevel.FUNCTION)
+def main(req: func.HttpRequest) -> func.HttpResponse:
     request_data = req.get_json()
     # Compose the simian app module namespace from base namespace and route parameter "step".
     app_module_namespace = "apps." + req.route_params.get("app").replace("-", "_")
