@@ -65,7 +65,7 @@ Fork this repository on GitHub such that you can set it up to build and deploy c
    In your GitHub Repository you can see the deployment activity and its success or failure under "Actions".  
    If successful, in your Azure Portal you should see "Status: Running" in theOverview page of your Azure Function.
 
-Alternatively, you can clone out this repository and create an Azure Function and deploy code changes from within Microsoft Visual Studio. See [Develop Azure Functions by using Visual Studio Code](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=node-v4%2Cpython-v2%2Cisolated-process%2Cquick-create&pivots=programming-language-python)
+Alternatively, you can clone this repository, locally create an Azure Function and deploy code changes from within Microsoft Visual Studio. See [Develop Azure Functions by using Visual Studio Code](https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=node-v4%2Cpython-v2%2Cisolated-process%2Cquick-create&pivots=programming-language-python)
 
 ## Optional: API Key
 Azure Functions allow different authorization levels. In this repository the default is "anonymous" as set in the `function.json` file.  
