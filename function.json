@@ -3,7 +3,6 @@
       {
         "type": "httpTrigger",
         "direction": "in",
-        "route": "orders",
         "authLevel": "function"
       },
       {
