@@ -5,8 +5,7 @@ from http import HTTPStatus
 import azure.functions as func
 from simian.entrypoint import entry_point_deploy
 
-# Anonymous access for symplicity
-app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
+app = func.FunctionApp()
 
 
 # Route is the part after the prefix (default: api/)
